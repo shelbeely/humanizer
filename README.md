@@ -1,44 +1,122 @@
-# Humanizer
+# AI Agent Skills Repository
 
-A Claude Code skill that removes signs of AI-generated writing from text, making it sound more natural and human.
+This repository contains agent skills following the [Agent Skills specification](https://agentskills.io/) for improving writing quality:
+
+## Skills Available
+
+### 1. Inclusive Humanizer (Recommended)
+**Location:** `inclusive-humanizer/`
+
+A comprehensive skill that combines both humanizing AI text AND ensuring trans inclusivity. This is the recommended skill for most use cases, especially for documentation, blog posts, and technical writing.
+
+**What it does:**
+- Removes AI writing patterns (promotional language, filler phrases, AI vocabulary, formulaic patterns)
+- Ensures trans-inclusive language (fixes gendered assumptions, outdated terminology, binary-only language)
+- Makes text sound authentic, natural, and respectful
+
+### 2. Humanizer (Standalone)
+**Location:** `SKILL.md` (root)
+
+Focuses solely on removing signs of AI-generated writing based on Wikipedia's "Signs of AI writing" guide.
+
+### 3. Trans Inclusivity (Standalone)
+**Location:** `TRANS_INCLUSIVITY_SKILL.md`
+
+Focuses solely on reviewing and improving text for trans-inclusive language.
+
+
 
 ## Installation
 
-### Recommended (clone directly into Claude Code skills directory)
+### Recommended: Clone the Repository
+
+Clone the entire repository to get all skills:
 
 ```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer
+git clone https://github.com/shelbeely/humanizer.git ~/.claude/skills/humanizer
 ```
 
-### Manual install/update (only the skill file)
+This installs:
+- `/inclusive-humanizer` - Combined skill (recommended)
+- `/humanizer` - Standalone humanizer  
+- `/trans-inclusivity` - Standalone trans inclusivity (from TRANS_INCLUSIVITY_SKILL.md)
 
-If you already have this repo cloned (or you downloaded `SKILL.md`), copy the skill file into Claude Code’s skills directory:
+### Alternative: Install Individual Skills
 
+If you only want specific skills:
+
+**Inclusive Humanizer (recommended):**
+```bash
+mkdir -p ~/.claude/skills/inclusive-humanizer
+curl -o ~/.claude/skills/inclusive-humanizer/SKILL.md https://raw.githubusercontent.com/shelbeely/humanizer/main/inclusive-humanizer/SKILL.md
+```
+
+**Humanizer only:**
 ```bash
 mkdir -p ~/.claude/skills/humanizer
-cp SKILL.md ~/.claude/skills/humanizer/
+curl -o ~/.claude/skills/humanizer/SKILL.md https://raw.githubusercontent.com/shelbeely/humanizer/main/SKILL.md
 ```
+
+**Trans Inclusivity only:**
+```bash
+mkdir -p ~/.claude/skills/trans-inclusivity
+curl -o ~/.claude/skills/trans-inclusivity/SKILL.md https://raw.githubusercontent.com/shelbeely/humanizer/main/TRANS_INCLUSIVITY_SKILL.md
+```
+
 
 ## Usage
 
-In Claude Code, invoke the skill:
+### Inclusive Humanizer (Recommended)
+
+For comprehensive text improvement (removes AI patterns AND ensures inclusivity):
 
 ```
-/humanizer
+/inclusive-humanizer
 
 [paste your text here]
 ```
 
-Or ask Claude to humanize text directly:
-
+Or ask Claude directly:
 ```
-Please humanize this text: [your text]
+Please review and improve this text for both AI patterns and trans inclusivity: [your text]
 ```
 
-## Overview
+### Individual Skills
 
-Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) guide, maintained by WikiProject AI Cleanup. This comprehensive guide comes from observations of thousands of instances of AI-generated text.
+**Humanizer only** (remove AI writing patterns):
+```
+/humanizer
+[paste your text]
+```
+
+**Trans Inclusivity only** (review for inclusive language):
+```
+/trans-inclusivity
+[paste your text]
+```
+
+## Why Use These Skills?
+
+### The Problem
+
+AI-generated text often has two related issues:
+
+1. **Robotic patterns** - Formulaic language, promotional tone, vague claims that signal AI authorship
+2. **Exclusionary language** - Gendered assumptions, binary-only options, outdated terminology
+
+### The Solution
+
+**Inclusive Humanizer** fixes both issues simultaneously, making text that is:
+- Natural and authentic (not robotic)
+- Specific and concrete (not vague)
+- Respectful and inclusive (not exclusionary)
+
+This is especially valuable for:
+- Technical documentation
+- Blog posts and articles
+- Company communications
+- Educational materials
+- Any text that needs to sound human AND be inclusive
 
 ### Key Insight from Wikipedia
 
@@ -125,17 +203,82 @@ Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikip
 >
 > None of this means the tools are useless. It means they are tools. They do not replace judgment, and they do not eliminate the need for tests. If you do not have tests, you cannot tell whether the suggestion is right.
 
+## Example Transformation
+
+**Before (AI-generated, non-inclusive):**
+> Great question! In today's rapidly evolving technological landscape, developers—both men and women—are leveraging groundbreaking tools that serve as a testament to human ingenuity. Additionally, each programmer should ensure his code is well-documented. It's not just about functionality; it's about fostering a vibrant ecosystem where mankind can thrive. The future looks bright!
+
+**After (Inclusive Humanizer applied):**
+> Developers use various tools to write better code. Each programmer should document their code thoroughly. Good documentation helps everyone understand and maintain the codebase.
+
+**What changed:**
+- ❌ Removed AI patterns: "Great question!", "rapidly evolving landscape," "testament to," "leveraging," "groundbreaking," "fostering," "vibrant ecosystem," "thrive," "future looks bright"
+- ✅ Fixed inclusivity: "men and women" → "developers," "his code" → "their code," "mankind" → "everyone"
+- ✨ Added authenticity: Specific, concrete statements instead of vague promotional claims
+
+## Key Patterns Addressed
+
+### AI Writing Patterns (24 total)
+- Significance inflation, promotional language, vague attributions
+- AI vocabulary overload ("leverage," "foster," "landscape")
+- Copula avoidance ("serves as" → "is")
+- Rule of three, negative parallelisms, em dash overuse
+- Chatbot artifacts, excessive hedging, generic conclusions
+- [See full list in SKILL.md]
+
+### Inclusivity Patterns (10+ total)
+- Binary gender assumptions (Male/Female only options)
+- Gendered assumptions about people (assuming "he" for developers)
+- Outdated terminology ("transsexual," "sex change," "preferred pronouns")
+- Unnecessarily gendered terms ("mankind," "manpower," "guys")
+- Biological essentialism ("only women can get pregnant")
+- [See full list in inclusive-humanizer/SKILL.md]
+
+## Agent Skills Standard
+
+All skills follow the [Agent Skills specification](https://agentskills.io/), an open standard maintained by Anthropic for teaching AI agents new capabilities. Each skill:
+- Has a `SKILL.md` file with YAML frontmatter
+- Contains detailed instructions and examples
+- Works across AI agent platforms that support the standard
+- Can be discovered and loaded automatically by agents
+
 ## References
 
-- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) - Primary source
-- [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup) - Maintaining organization
+### AI Writing Patterns
+- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) - Primary source, maintained by WikiProject AI Cleanup
+- Based on observations of thousands of AI-generated text instances
+
+### Trans Inclusivity
+- [GLAAD Media Reference Guide](https://www.glaad.org/reference/trans-terms) - Trans terminology and media best practices
+- [Trans Journalists Association Style Guide](https://transjournalists.org/style-guide/) - Journalistic standards
+- [Human Rights Campaign](https://www.hrc.org/resources/glossary-of-terms) - Terminology and workplace inclusion
 
 ## Version History
 
+### Inclusive Humanizer
+- **1.0.0** - Initial release (2026)
+  - Combined humanizer and trans inclusivity patterns
+  - 24 AI writing patterns + 10+ inclusivity patterns
+  - Integrated examples showing both fixes together
+  - Context-specific guidance for documentation, medical, historical contexts
+
+### Humanizer (Standalone)
 - **2.1.1** - Fixed pattern #18 example (curly quotes vs straight quotes)
 - **2.1.0** - Added before/after examples for all 24 patterns
 - **2.0.0** - Complete rewrite based on raw Wikipedia article content
 - **1.0.0** - Initial release
+
+### Trans Inclusivity (Standalone)
+- **1.0.0** - Initial release (2026)
+  - Core patterns for trans-inclusive language
+  - Examples across multiple contexts
+  - Guidance on pronouns, terminology, and erasure
+
+## Contributing
+
+Contributions are welcome! If you've identified new patterns or have suggestions for improvements, please open an issue or pull request.
+
+For the Trans Inclusivity skill specifically, we welcome feedback from trans and non-binary individuals to ensure the guidance remains current and respectful.
 
 ## License
 
