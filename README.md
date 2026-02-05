@@ -17,14 +17,14 @@ A comprehensive skill that combines both humanizing AI text AND ensuring trans i
 ### 2. Inclusive Software (NEW - Recommended for Code/UI)
 **Location:** `inclusive-software/`
 
-A comprehensive skill for making software accessible and inclusive for all users. Use when building or reviewing software products, interfaces, APIs, and technical systems.
+A comprehensive skill for making software LGBTQ-inclusive. Use when building or reviewing software products, interfaces, APIs, forms, and technical systems.
 
 **What it does:**
-- Ensures accessibility (WCAG AA compliance, keyboard navigation, screen reader support)
-- Implements gender inclusivity in forms, data models, and UI
-- Addresses cultural sensitivity (i18n, diverse examples, flexible formats)
-- Supports age and economic diversity (font sizes, offline support, performance)
-- Promotes representation in code (diverse test data, documentation examples)
+- Implements gender inclusivity (non-binary options, pronouns, trans-inclusive forms and data models)
+- Supports diverse sexual orientations and relationships (neutral language for partners, same-sex relationships, non-traditional families)
+- Ensures privacy and safety (prevents forced outing, respects chosen disclosure)
+- Promotes representation (diverse examples in test data, documentation, and UI)
+- Provides technical guidance (database schemas, validation logic, API design, UI patterns)
 
 ### 3. Humanizer (Standalone)
 **Location:** `SKILL.md` (root)
@@ -102,7 +102,7 @@ Please review and improve this text for both AI patterns and trans inclusivity: 
 
 ### Inclusive Software (For Code/UI/Forms)
 
-For making software accessible and inclusive:
+For making software LGBTQ-inclusive:
 
 ```
 /inclusive-software
@@ -112,7 +112,11 @@ For making software accessible and inclusive:
 
 Or ask Claude directly:
 ```
-Please review this form for inclusivity and accessibility issues: [your code]
+Please review this user registration form for LGBTQ inclusivity: [your code]
+```
+
+```
+Review this database schema for gender and relationship inclusivity: [your schema]
 ```
 
 ### Individual Skills
@@ -140,9 +144,9 @@ Modern software and documentation often have overlapping issues:
    - Exclusionary language (gendered assumptions, binary-only options, outdated terminology)
 
 2. **Software Issues:**
-   - Inaccessible interfaces (poor contrast, no keyboard support, missing alt text)
-   - Non-inclusive design (binary gender fields, culturally-specific assumptions)
-   - Limited representation (Western-only examples, gendered defaults)
+   - Non-inclusive forms (binary gender fields, heteronormative assumptions, forced disclosure)
+   - Privacy violations (exposing deadnames, outing users, no disclosure controls)
+   - Limited representation (Western-only examples, no LGBTQ representation)
 
 ### The Solutions
 
@@ -152,16 +156,18 @@ Modern software and documentation often have overlapping issues:
 - Respectful and inclusive (not exclusionary)
 
 **Inclusive Software** fixes code/UI issues, creating products that:
-- Work for users with disabilities (WCAG AA accessible)
-- Support diverse gender identities (inclusive forms and data models)
-- Respect cultural differences (i18n, diverse examples)
-- Accommodate all users (age, economic constraints, technical ability)
+- Respect diverse gender identities (non-binary options, pronouns, trans-inclusive data models)
+- Support all relationship types (same-sex partnerships, neutral "partner" language, flexible families)
+- Protect user privacy (no forced outing, disclosure controls, deadname protection)
+- Use inclusive language ("they/them" default, "parent" not "mother/father", "partner" not "spouse")
+- Include diverse representation (LGBTQ examples in test data, docs, and UI)
 
 **Use together for:**
-- Technical documentation that's both well-written AND accessible
-- Forms that use natural language AND inclusive fields
-- Error messages that are clear AND respectful
-- READMEs and docs with authentic voice AND diverse examples
+- Technical documentation that's both well-written AND respectful
+- Forms with natural language AND LGBTQ-inclusive fields
+- Error messages that are clear AND use gender-neutral language
+- READMEs with authentic voice AND diverse, inclusive examples
+- Software that respects all users' identities and relationships
 
 ### Key Insight from Wikipedia
 
