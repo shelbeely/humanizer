@@ -426,6 +426,92 @@ Or if separate fields needed:
 
 ---
 
+**Pronoun Fields**
+- Problem: No pronoun support or limited dropdown options
+- Solution: Free-text input with datalist suggestions + smart normalization
+
+**Why this is a challenge:**
+- Dropdown menus can't include all pronoun variations (ze/zir, fae/faer, etc.)
+- Open text fields allow typos and inconsistencies ("she/her" vs "She / Her")
+- Need to balance user freedom with data consistency
+
+**Recommended Approach: Hybrid Input with Normalization**
+
+```html
+<label for="pronouns">Pronouns (optional)</label>
+<input 
+  type="text" 
+  id="pronouns"
+  name="pronouns"
+  placeholder="e.g., she/her, they/them"
+  list="common-pronouns"
+  maxlength="50"
+  autocomplete="off"
+  aria-describedby="pronouns-help"
+/>
+<datalist id="common-pronouns">
+  <option value="she/her">
+  <option value="he/him">
+  <option value="they/them">
+  <option value="she/they">
+  <option value="he/they">
+  <option value="ze/hir">
+  <option value="ze/zir">
+  <option value="xe/xem">
+  <option value="any pronouns">
+  <option value="ask me">
+</datalist>
+<small id="pronouns-help">
+  How would you like to be referred to?
+</small>
+```
+
+**Why this works:**
+- ✅ Shows common options (guides users, reduces typos)
+- ✅ Allows free text (respects diversity, no one is excluded)
+- ✅ No forced choice (truly optional)
+- ✅ Future-proof (new pronouns work without code changes)
+- ✅ Degrades gracefully (works as plain text in older browsers)
+
+**Backend Normalization:**
+
+```javascript
+// Normalize for storage but keep original for display
+function normalizePronoun(input) {
+  const original = input.trim();
+  
+  // Normalize spacing and separators
+  const normalized = original
+    .toLowerCase()
+    .replace(/\s+/g, ' ')        // Multiple spaces → single
+    .replace(/\s*\/\s*/g, '/')   // "she / her" → "she/her"
+    .replace(/\s*-\s*/g, '/');   // "she-her" → "she/her"
+  
+  return {
+    original: original,      // Display this!
+    normalized: normalized   // Use for matching/searching
+  };
+}
+```
+
+**Database Storage:**
+
+```sql
+CREATE TABLE users (
+  id UUID PRIMARY KEY,
+  pronouns_display VARCHAR(50) NULL,     -- Store original (show this)
+  pronouns_normalized VARCHAR(50) NULL,  -- For searching/filtering
+  
+  CHECK (LENGTH(TRIM(pronouns_display)) <= 50)
+);
+```
+
+**Key principle:** Store what users enter, normalize for comparison, but ALWAYS display the original.
+
+**For detailed guidance:** See [PRONOUN_NORMALIZATION.md](../PRONOUN_NORMALIZATION.md) for complete implementation examples including React components, validation logic, and API design.
+
+---
+
 ### 6. Data Models and Databases
 
 **Gender Field Design**

@@ -160,6 +160,87 @@ This document provides practical examples of using the inclusive-humanizer skill
 
 ---
 
+## Example 9: Pronoun Field Implementation
+
+**Original (Bad - Dropdown Only):**
+```html
+<label>Pronouns *</label>
+<select name="pronouns" required>
+  <option value="">Select...</option>
+  <option value="she/her">She/Her</option>
+  <option value="he/him">He/Him</option>
+  <option value="they/them">They/Them</option>
+</select>
+```
+
+**Issues:**
+- Excludes neopronouns (ze/hir, fae/faer, etc.)
+- Forces users to choose from limited list
+- Makes field required
+- Can't handle new or uncommon pronouns
+
+**After (Good - Hybrid Approach):**
+```html
+<label for="pronouns">Pronouns (optional)</label>
+<input 
+  type="text" 
+  id="pronouns"
+  name="pronouns"
+  placeholder="e.g., she/her, they/them"
+  list="common-pronouns"
+  maxlength="50"
+/>
+<datalist id="common-pronouns">
+  <option value="she/her">
+  <option value="he/him">
+  <option value="they/them">
+  <option value="she/they">
+  <option value="he/they">
+  <option value="ze/hir">
+  <option value="ze/zir">
+  <option value="xe/xem">
+  <option value="any pronouns">
+  <option value="ask me">
+</datalist>
+<small>How would you like to be referred to?</small>
+```
+
+**What Changed:**
+- ✅ Free-text input allows any pronouns (fae/faer, ey/em, etc.)
+- ✅ Datalist shows common options to guide users
+- ✅ Optional field (not required)
+- ✅ Future-proof (works with pronouns that don't exist yet)
+- ✅ Degrades gracefully (becomes plain text in old browsers)
+
+**Backend Handling:**
+```javascript
+// Normalize for comparison but keep original for display
+function normalizePronoun(input) {
+  const original = input.trim();
+  const normalized = original
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/\s*\/\s*/g, '/');  // "she / her" → "she/her"
+  
+  return {
+    display: original,      // Show this to users!
+    normalized: normalized  // Use for searching
+  };
+}
+```
+
+**Database:**
+```sql
+CREATE TABLE users (
+  pronouns_display VARCHAR(50),      -- What user entered
+  pronouns_normalized VARCHAR(50)    -- For matching/search
+);
+```
+
+**Why this matters:** Solves the fundamental tension between flexibility (any input) and consistency (standardized values). See [PRONOUN_NORMALIZATION.md](PRONOUN_NORMALIZATION.md) for complete implementation guide.
+
+---
+
 ## Tips for Best Results
 
 1. **Be specific**: Replace vague AI claims with concrete details, numbers, and sources

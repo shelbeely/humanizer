@@ -293,6 +293,18 @@ All skills follow the [Agent Skills specification](https://agentskills.io/), an 
 - Works across AI agent platforms that support the standard
 - Can be discovered and loaded automatically by agents
 
+## Additional Documentation
+
+- **[PRONOUN_NORMALIZATION.md](PRONOUN_NORMALIZATION.md)** - Comprehensive guide for implementing pronoun fields in software
+  - Hybrid approach: free-text input with datalist suggestions
+  - Backend normalization strategies (JavaScript, Python)
+  - Database schema recommendations
+  - Display and validation examples
+  - Solves the tension between open input (flexible but inconsistent) and preset options (limited but standardized)
+
+- **[EXAMPLES.md](EXAMPLES.md)** - Practical usage examples for the inclusive-humanizer skill
+- **[SUMMARY.md](SUMMARY.md)** - Complete project overview and reference guide
+
 ## References
 
 ### AI Writing Patterns
