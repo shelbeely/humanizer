@@ -4,22 +4,34 @@ This repository contains agent skills following the [Agent Skills specification]
 
 ## Skills Available
 
-### 1. Inclusive Humanizer (Recommended)
+### 1. Inclusive Humanizer (Recommended for Text)
 **Location:** `inclusive-humanizer/`
 
-A comprehensive skill that combines both humanizing AI text AND ensuring trans inclusivity. This is the recommended skill for most use cases, especially for documentation, blog posts, and technical writing.
+A comprehensive skill that combines both humanizing AI text AND ensuring trans inclusivity. This is the recommended skill for documentation, blog posts, articles, and any written content.
 
 **What it does:**
 - Removes AI writing patterns (promotional language, filler phrases, AI vocabulary, formulaic patterns)
 - Ensures trans-inclusive language (fixes gendered assumptions, outdated terminology, binary-only language)
 - Makes text sound authentic, natural, and respectful
 
-### 2. Humanizer (Standalone)
+### 2. Inclusive Software (NEW - Recommended for Code/UI)
+**Location:** `inclusive-software/`
+
+A comprehensive skill for making software accessible and inclusive for all users. Use when building or reviewing software products, interfaces, APIs, and technical systems.
+
+**What it does:**
+- Ensures accessibility (WCAG AA compliance, keyboard navigation, screen reader support)
+- Implements gender inclusivity in forms, data models, and UI
+- Addresses cultural sensitivity (i18n, diverse examples, flexible formats)
+- Supports age and economic diversity (font sizes, offline support, performance)
+- Promotes representation in code (diverse test data, documentation examples)
+
+### 3. Humanizer (Standalone)
 **Location:** `SKILL.md` (root)
 
 Focuses solely on removing signs of AI-generated writing based on Wikipedia's "Signs of AI writing" guide.
 
-### 3. Trans Inclusivity (Standalone)
+### 4. Trans Inclusivity (Standalone)
 **Location:** `TRANS_INCLUSIVITY_SKILL.md`
 
 Focuses solely on reviewing and improving text for trans-inclusive language.
@@ -37,7 +49,8 @@ git clone https://github.com/shelbeely/humanizer.git ~/.claude/skills/humanizer
 ```
 
 This installs:
-- `/inclusive-humanizer` - Combined skill (recommended)
+- `/inclusive-humanizer` - Combined skill for text (AI patterns + trans inclusivity)
+- `/inclusive-software` - Combined skill for software (accessibility + inclusivity)
 - `/humanizer` - Standalone humanizer  
 - `/trans-inclusivity` - Standalone trans inclusivity (from TRANS_INCLUSIVITY_SKILL.md)
 
@@ -45,10 +58,16 @@ This installs:
 
 If you only want specific skills:
 
-**Inclusive Humanizer (recommended):**
+**Inclusive Humanizer (for text):**
 ```bash
 mkdir -p ~/.claude/skills/inclusive-humanizer
 curl -o ~/.claude/skills/inclusive-humanizer/SKILL.md https://raw.githubusercontent.com/shelbeely/humanizer/main/inclusive-humanizer/SKILL.md
+```
+
+**Inclusive Software (for code/UI):**
+```bash
+mkdir -p ~/.claude/skills/inclusive-software
+curl -o ~/.claude/skills/inclusive-software/SKILL.md https://raw.githubusercontent.com/shelbeely/humanizer/main/inclusive-software/SKILL.md
 ```
 
 **Humanizer only:**
@@ -66,7 +85,7 @@ curl -o ~/.claude/skills/trans-inclusivity/SKILL.md https://raw.githubuserconten
 
 ## Usage
 
-### Inclusive Humanizer (Recommended)
+### Inclusive Humanizer (For Text/Documentation)
 
 For comprehensive text improvement (removes AI patterns AND ensures inclusivity):
 
@@ -79,6 +98,21 @@ For comprehensive text improvement (removes AI patterns AND ensures inclusivity)
 Or ask Claude directly:
 ```
 Please review and improve this text for both AI patterns and trans inclusivity: [your text]
+```
+
+### Inclusive Software (For Code/UI/Forms)
+
+For making software accessible and inclusive:
+
+```
+/inclusive-software
+
+[paste your code, describe your UI, or ask for review]
+```
+
+Or ask Claude directly:
+```
+Please review this form for inclusivity and accessibility issues: [your code]
 ```
 
 ### Individual Skills
@@ -99,24 +133,35 @@ Please review and improve this text for both AI patterns and trans inclusivity: 
 
 ### The Problem
 
-AI-generated text often has two related issues:
+Modern software and documentation often have overlapping issues:
 
-1. **Robotic patterns** - Formulaic language, promotional tone, vague claims that signal AI authorship
-2. **Exclusionary language** - Gendered assumptions, binary-only options, outdated terminology
+1. **Text Issues:**
+   - Robotic AI patterns (formulaic language, promotional tone, vague claims)
+   - Exclusionary language (gendered assumptions, binary-only options, outdated terminology)
 
-### The Solution
+2. **Software Issues:**
+   - Inaccessible interfaces (poor contrast, no keyboard support, missing alt text)
+   - Non-inclusive design (binary gender fields, culturally-specific assumptions)
+   - Limited representation (Western-only examples, gendered defaults)
 
-**Inclusive Humanizer** fixes both issues simultaneously, making text that is:
+### The Solutions
+
+**Inclusive Humanizer** fixes text issues, making content that is:
 - Natural and authentic (not robotic)
 - Specific and concrete (not vague)
 - Respectful and inclusive (not exclusionary)
 
-This is especially valuable for:
-- Technical documentation
-- Blog posts and articles
-- Company communications
-- Educational materials
-- Any text that needs to sound human AND be inclusive
+**Inclusive Software** fixes code/UI issues, creating products that:
+- Work for users with disabilities (WCAG AA accessible)
+- Support diverse gender identities (inclusive forms and data models)
+- Respect cultural differences (i18n, diverse examples)
+- Accommodate all users (age, economic constraints, technical ability)
+
+**Use together for:**
+- Technical documentation that's both well-written AND accessible
+- Forms that use natural language AND inclusive fields
+- Error messages that are clear AND respectful
+- READMEs and docs with authentic voice AND diverse examples
 
 ### Key Insight from Wikipedia
 
