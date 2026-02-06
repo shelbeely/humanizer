@@ -5,10 +5,13 @@ Based on the current repository, here are areas that could be expanded to provid
 ## 1. ✅ COMPLETED: Pronoun Normalization
 **Status:** Fully implemented in PRONOUN_NORMALIZATION.md
 
-## 2. 🔄 MEDIUM PRIORITY: Name Change Workflows
+## 2. ✅ COMPLETED: Name Change Workflows
 
-**Current Coverage:** Basic mentions in inclusive-software skill
-**Gap:** Detailed implementation for name change systems
+**Status:** Basic implementation added in inclusive-software/SKILL.md
+- Chosen name / display name separation
+- Name change form flow
+- Database schema for legal vs. display name
+- Backend handling to prevent deadname exposure
 
 **Could Add:**
 - Step-by-step name change flow (UI/UX)
@@ -98,10 +101,13 @@ Based on the current repository, here are areas that could be expanded to provid
 - Mental health support for LGBTQ patients
 ```
 
-## 6. 🔵 LOW PRIORITY: Content Moderation & Safety
+## 6. ✅ COMPLETED: Content Moderation & Safety
 
-**Current Coverage:** Not covered
-**Gap:** Handling LGBTQ-specific harassment
+**Status:** Basic implementation added in inclusive-software/SKILL.md
+- Misgendering as harassment (reporting options)
+- Deadnaming detection and prevention
+- Outing as privacy violation (reportable offense)
+- Trans-specific reporting options in moderation UI
 
 **Could Add:**
 - Misgendering as harassment

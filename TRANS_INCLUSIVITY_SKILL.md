@@ -364,6 +364,56 @@ Trans inclusivity in writing means:
 
 ---
 
+### 13. Nonbinary Erasure
+
+**Problem:** Text that mentions trans people but still assumes a binary (trans men and trans women only), erasing nonbinary, genderqueer, genderfluid, and agender people.
+
+**Before:**
+> Our policy is inclusive of trans men and trans women.
+>
+> The form asks whether users are male, female, or transgender.
+>
+> We support trans employees who are transitioning from one gender to another.
+
+**After:**
+> Our policy is inclusive of all gender identities, including trans and nonbinary people.
+>
+> The form allows users to share their gender identity if they choose.
+>
+> We support trans and nonbinary employees, including those who may not pursue medical transition.
+
+**Why:** Not all trans people identify within the binary. Nonbinary, genderqueer, genderfluid, agender, and Two-Spirit people exist and should be included. Transition looks different for everyone — it is not always "from one gender to another."
+
+---
+
+### 14. Neopronoun Dismissal
+
+**Problem:** Dismissing or refusing to use neopronouns (ze/zir, xe/xem, fae/faer, ey/em, etc.).
+
+**Before:**
+> We respect all pronouns: he, she, and they.
+>
+> Please choose your pronouns: he/him, she/her, or they/them.
+
+**After:**
+> We respect all pronouns, including neopronouns like ze/zir, xe/xem, and fae/faer.
+>
+> Please share your pronouns (e.g., she/her, they/them, ze/zir, or any others).
+
+**Common neopronouns to recognize:**
+
+| Subject | Object | Possessive | Reflexive | Example |
+|---------|--------|------------|-----------|---------|
+| ze | zir | zir | zirself | Ze went to zir class. |
+| ze | hir | hir | hirself | Ze finished hir work. |
+| xe | xem | xyr | xemself | Xe brought xyr laptop. |
+| ey | em | eir | eirself | Ey shared eir notes. |
+| fae | faer | faer | faerself | Fae updated faer profile. |
+
+**Why:** Limiting pronoun options to he/she/they still excludes people. Neopronouns are valid and should be supported in both writing and software.
+
+---
+
 ## POSITIVE PATTERNS TO EMBRACE
 
 ### 1. Normalizing Pronoun Sharing
