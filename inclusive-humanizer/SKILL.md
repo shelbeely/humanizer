@@ -300,6 +300,22 @@ Trans inclusivity means respecting people's stated identities, avoiding assumpti
 
 ---
 
+**25. Deadnaming and Misgendering**
+- Problem: Using someone's former name (deadname) or wrong pronouns
+- Fix: Use current name and pronouns, even when referring to the past
+
+**Before:** "Before transitioning, Michael was known as Michelle and she worked in finance."
+
+**After:** "Michael worked in finance before transitioning."
+
+**Guidelines:**
+- Use a person's current name even when referring to past events
+- Use current pronouns retroactively unless they've specified otherwise
+- Never share someone's deadname without explicit permission
+- If referencing a name change is necessary, say "formerly known as" rather than "real name was"
+
+---
+
 ## COMBINING BOTH SKILLS
 
 Often AI-generated text has BOTH problems. Fix them together:

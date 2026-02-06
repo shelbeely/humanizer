@@ -64,7 +64,7 @@ Technical decisions about data structures, validation rules, and UI patterns dir
 
 ---
 
-## PART 1: GENDER IDENTITY
+## PART 1: ACCESSIBILITY
 
 ### 1. Visual Accessibility
 
@@ -509,6 +509,98 @@ CREATE TABLE users (
 **Key principle:** Store what users enter, normalize for comparison, but ALWAYS display the original.
 
 **For detailed guidance:** See [PRONOUN_NORMALIZATION.md](../PRONOUN_NORMALIZATION.md) for complete implementation examples including React components, validation logic, and API design.
+
+---
+
+**Chosen Name / Name Change**
+- Problem: System only stores legal name or doesn't support name changes gracefully
+- Fix: Separate legal name from display name; support easy name updates
+
+**Before (BAD):**
+```jsx
+<input name="name" required placeholder="Full legal name" />
+```
+
+**Issues:**
+- Forces trans users to display their legal (potentially dead) name
+- No way to update name without contacting support
+- Old name may persist in logs, notifications, and cached data
+
+**After (GOOD):**
+```jsx
+<input name="legalName" placeholder="Legal name (private, only for billing/legal)" />
+<input 
+  name="displayName" 
+  required 
+  placeholder="Name you'd like to go by"
+  aria-describedby="display-name-help"
+/>
+<small id="display-name-help">
+  This is the name shown on your profile and in communications.
+</small>
+```
+
+**Backend Handling:**
+
+```javascript
+// When displaying a user's name anywhere in the UI, always use displayName
+function getUserDisplayName(user) {
+  return user.displayName || user.legalName;
+}
+
+// Legal name should only appear in billing, legal documents, or admin views
+function getUserLegalName(user, requesterRole) {
+  if (['admin', 'billing'].includes(requesterRole)) {
+    return user.legalName;
+  }
+  return null; // Don't expose legal name to other users
+}
+```
+
+**Database Schema:**
+
+```sql
+CREATE TABLE users (
+  id UUID PRIMARY KEY,
+  display_name VARCHAR(255) NOT NULL,       -- Shown everywhere
+  legal_name VARCHAR(255),                  -- Private, billing/legal only
+  display_name_updated_at TIMESTAMP,
+  
+  -- Don't store name history by default (prevents deadname exposure)
+  -- If audit logging is required, store in a separate access-controlled table
+);
+```
+
+**Name Change Flow:**
+
+```jsx
+function NameChangeForm({ user }) {
+  return (
+    <form onSubmit={handleNameChange}>
+      <label htmlFor="displayName">
+        Update your display name
+      </label>
+      <input
+        id="displayName"
+        name="displayName"
+        defaultValue={user.displayName}
+        required
+      />
+      <p>
+        Your display name will be updated across the platform immediately.
+        Previous names are not stored or visible to others.
+      </p>
+      <button type="submit">Update name</button>
+    </form>
+  );
+}
+```
+
+**Why this matters:**
+- Trans users can change their display name without exposing their legal name
+- Prevents deadnaming in notifications, emails, and UI
+- Legal name is only used where legally required
+- No name history exposed to other users
 
 ---
 
@@ -1436,6 +1528,51 @@ Some apps require disclosure of sexual orientation or gender identity without pr
 
 ---
 
+### Content Moderation for Trans Safety
+
+**Problem: Misgendering and Deadnaming as Harassment**
+
+Deliberate misgendering and deadnaming are forms of harassment that content moderation systems should detect and address.
+
+**Reporting Options:**
+```jsx
+<ReportForm>
+  <h3>Report this content</h3>
+  <RadioGroup name="reason">
+    <Radio value="harassment">Harassment or bullying</Radio>
+    <Radio value="misgendering">Deliberate misgendering</Radio>
+    <Radio value="deadnaming">Using my previous name (deadnaming)</Radio>
+    <Radio value="outing">Disclosing my identity without consent</Radio>
+    <Radio value="hate-speech">Hate speech or slurs</Radio>
+    <Radio value="other">Other</Radio>
+  </RadioGroup>
+  <textarea name="details" placeholder="Tell us what happened (optional)" />
+</ReportForm>
+```
+
+**Automated Protections:**
+```javascript
+// Flag content that uses a user's previous name when they've changed it
+function checkForDeadnaming(content, mentionedUser) {
+  if (!mentionedUser.previousNames || mentionedUser.previousNames.length === 0) {
+    return false;
+  }
+  
+  const contentLower = content.toLowerCase();
+  return mentionedUser.previousNames.some(
+    name => contentLower.includes(name.toLowerCase())
+  );
+}
+```
+
+**Why this matters:**
+- Deliberate misgendering causes real harm to trans users
+- Deadnaming can endanger people who haven't disclosed their trans status
+- Outing someone without consent is a safety issue, not just rudeness
+- Trans-specific reporting options signal that the platform takes these issues seriously
+
+---
+
 ## TESTING CHECKLIST
 
 ### LGBTQ Inclusivity Checklist
@@ -1444,9 +1581,12 @@ Some apps require disclosure of sexual orientation or gender identity without pr
 - [ ] Gender field is optional
 - [ ] Gender includes non-binary options
 - [ ] Pronouns field exists and is optional
-- [ ] Name changes are easy
+- [ ] Pronoun field accepts free text (not just dropdown)
+- [ ] Name changes are easy and immediate
 - [ ] Legal name separate from display name
-- [ ] No deadname exposure
+- [ ] No deadname exposure in UI, emails, notifications, or logs
+- [ ] Name history not visible to other users
+- [ ] Neopronouns (ze/zir, fae/faer, etc.) accepted and displayed correctly
 
 **Sexual Orientation:**
 - [ ] Relationship fields use neutral language ("partner" not "spouse/wife/husband")
@@ -1465,6 +1605,12 @@ Some apps require disclosure of sexual orientation or gender identity without pr
 - [ ] No forced disclosure
 - [ ] Coming out is user's choice
 - [ ] Private information never exposed in APIs
+
+**Content Moderation:**
+- [ ] Reporting options include misgendering and deadnaming
+- [ ] Deliberate misgendering treated as harassment
+- [ ] Deadnaming detection for name-changed users
+- [ ] Outing others without consent is a reportable offense
 
 **Language:**
 - [ ] "Partner" used instead of gendered terms
