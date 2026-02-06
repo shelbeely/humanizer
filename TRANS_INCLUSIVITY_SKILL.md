@@ -402,13 +402,13 @@ Trans inclusivity in writing means:
 
 **Common neopronouns to recognize:**
 
-| Subject | Object | Possessive | Example |
-|---------|--------|------------|---------|
-| ze | zir | zir | Ze went to zir class. |
-| ze | hir | hir | Ze finished hir work. |
-| xe | xem | xyr | Xe brought xyr laptop. |
-| ey | em | eir | Ey shared eir notes. |
-| fae | faer | faer | Fae updated faer profile. |
+| Subject | Object | Possessive | Reflexive | Example |
+|---------|--------|------------|-----------|---------|
+| ze | zir | zir | zirself | Ze went to zir class. |
+| ze | hir | hir | hirself | Ze finished hir work. |
+| xe | xem | xyr | xemself | Xe brought xyr laptop. |
+| ey | em | eir | eirself | Ey shared eir notes. |
+| fae | faer | faer | faerself | Fae updated faer profile. |
 
 **Why:** Limiting pronoun options to he/she/they still excludes people. Neopronouns are valid and should be supported in both writing and software.
 

@@ -1550,11 +1550,15 @@ Deliberate misgendering and deadnaming are forms of harassment that content mode
 </ReportForm>
 ```
 
-**Automated Protections:**
+**Automated Protections (opt-in only):**
+
+Note: Automated deadnaming detection requires storing previous names, which creates its own privacy risk. Only implement this if users explicitly opt in, and store previous names in a separate access-controlled table — never expose them in APIs or UI.
+
 ```javascript
-// Flag content that uses a user's previous name when they've changed it
+// Only available if user has opted into deadname protection
 function checkForDeadnaming(content, mentionedUser) {
-  if (!mentionedUser.previousNames || mentionedUser.previousNames.length === 0) {
+  // previousNames only exists if the user opted in to deadname protection
+  if (!mentionedUser.deadnameProtectionEnabled || !mentionedUser.previousNames) {
     return false;
   }
   
